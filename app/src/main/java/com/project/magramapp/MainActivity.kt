@@ -1,14 +1,8 @@
 package com.project.magramapp
 
-import android.app.ProgressDialog
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
@@ -20,6 +14,7 @@ import java.util.ArrayList
 class MainActivity : AppCompatActivity() {
     lateinit var binding : ActivityMainBinding
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -31,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         val listPostAdapter = ArrayList<ListPostAdapter>()
 
         getPostData(listPostAdapter,listUser)
+
 
         binding.apply {
             //Toolbar
@@ -47,25 +43,41 @@ class MainActivity : AppCompatActivity() {
         }//Binding
     }
 
+
+    @SuppressLint("NotifyDataSetChanged")
     private fun getPostData(listPost : ArrayList<ListPostAdapter>, listUser : ArrayList<UserData>){
 
         //stringRequest
         val queue = Volley.newRequestQueue(this)
-        val url = "https://jsonplaceholder.typicode.com/posts"
+        val urlPost = "https://jsonplaceholder.typicode.com/posts"
+        val urlUser = "https://jsonplaceholder.typicode.com/users"
 
         listUser.clear()
         listPost.clear()
 
-        getUserData(listUser)
+        val stringRequestUser = StringRequest(
+            Request.Method.GET,urlUser,
+            { response ->
+                val strResponse = response.toString()
+                val jsonarray = JSONArray(strResponse)
+                for(i in 0 until jsonarray.length()){
+                    val jsonobject = jsonarray.getJSONObject(i)
+                    val id = jsonobject.get("id").toString()
+                    val name = jsonobject.get("name").toString()
+                    val companyName =jsonobject.getJSONObject("company").get("name").toString()
+                    listUser.add(UserData(id,name,companyName))
+                }
+            }, {})
+
 
         val stringRequest = StringRequest(
-            Request.Method.GET,url,
+            Request.Method.GET,urlPost,
             { response ->
 
                 val strResponse = response.toString()
                 val jsonarray = JSONArray(strResponse)
 
-                for(i in 0 until 10){
+                for(i in 0 until 15){
                     val random = (0 until jsonarray.length()).random()
                     val jsonobject = jsonarray.getJSONObject(random)
                     val userId = jsonobject.get("userId").toString()
@@ -82,35 +94,22 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     listPost.add(ListPostAdapter(userId,id,title,body,username,companyName))
+
                 }
 
                 //RecyclerView
                 binding.rvPostMain.adapter = AdapterViewPostMain(listPost)
                 binding.rvPostMain.layoutManager = LinearLayoutManager(this@MainActivity)
                 binding.rvPostMain.setHasFixedSize(true)
-            }, {})
-        queue.add(stringRequest)
-    }
+                binding.rvPostMain.itemAnimator = null
 
-    private fun getUserData(listUserData: ArrayList<UserData>){
-        val queue = Volley.newRequestQueue(this)
-        val url = "https://jsonplaceholder.typicode.com/users"
 
-        val stringRequest = StringRequest(
-            Request.Method.GET,url,
-            { response ->
-                val strResponse = response.toString()
-                val jsonarray = JSONArray(strResponse)
-                for(i in 0 until jsonarray.length()){
-                    val jsonobject = jsonarray.getJSONObject(i)
-                    val id = jsonobject.get("id").toString()
-                    val name = jsonobject.get("name").toString()
-                    val companyName =jsonobject.getJSONObject("company").get("name").toString()
-                    listUserData.add(UserData(id,name,companyName))
-                }
             }, {})
 
+        queue.add(stringRequestUser)
         queue.add(stringRequest)
+
     }
+
 
 }

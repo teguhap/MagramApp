@@ -41,6 +41,7 @@ class AdapterViewPostMain(val listPostAdapter : List<ListPostAdapter>) : Recycle
             cvPost.setOnClickListener {
 
                 Intent(context,DetailPostActivity :: class.java).also {
+                    it.putExtra("postId",currentItem.idPost)
                     it.putExtra("userId",currentItem.userId)
                     it.putExtra("title",tvTitle.text.toString())
                     it.putExtra("username",tvUsername.text.toString())

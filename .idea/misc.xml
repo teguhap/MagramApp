@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Selly Nursyifa/AndroidStudioProjects/MagramApp/app/src/main/res/layout/activity_detail_post.xml" value="0.25" />
         <entry key="..\:/Users/Selly Nursyifa/AndroidStudioProjects/MagramApp/app/src/main/res/layout/activity_main.xml" value="0.4" />
-        <entry key="..\:/Users/Selly Nursyifa/AndroidStudioProjects/MagramApp/app/src/main/res/layout/layout_view_post_main.xml" value="0.1" />
+        <entry key="..\:/Users/Selly Nursyifa/AndroidStudioProjects/MagramApp/app/src/main/res/layout/activity_splash_screen.xml" value="0.25" />
+        <entry key="..\:/Users/Selly Nursyifa/AndroidStudioProjects/MagramApp/app/src/main/res/layout/layout_view_post_main.xml" value="0.536" />
         <entry key="..\:/Users/Selly Nursyifa/AndroidStudioProjects/MagramApp/app/src/main/res/menu/main_menu_bar.xml" value="0.20155038759689922" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/MagramApp/app/src/main/res/layout/activity_detail_post.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/MagramApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
