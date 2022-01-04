@@ -1,12 +1,16 @@
 package com.project.magramapp.adapter
 
 
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.project.magramapp.PhotoDetailActivity
 import com.project.magramapp.R
 import com.project.magramapp.dataclass.PhotosData
 import com.squareup.picasso.Picasso
@@ -38,7 +42,11 @@ class AdapterViewAlbumPhotos(val listPhotos : List<PhotosData>) : RecyclerView.A
             Picasso.get().load(thumbnailUrl).fit().centerCrop().into(ivThumbnail)
 
             ivThumbnail.setOnClickListener {
-                Toast.makeText(context,"Thumbnail terclick",Toast.LENGTH_SHORT).show()
+                Intent(context,PhotoDetailActivity :: class.java).also {
+                    it.putExtra("title",title)
+                    it.putExtra("url",url)
+                    startActivity(context,it, Bundle.EMPTY)
+                }
             }
 
 

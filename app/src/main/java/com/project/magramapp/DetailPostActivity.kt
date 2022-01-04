@@ -1,5 +1,6 @@
 package com.project.magramapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +15,7 @@ import java.util.ArrayList
 
 class DetailPostActivity : AppCompatActivity() {
     lateinit var binding : ActivityDetailPostBinding
+    val listComment = ArrayList<CommentData>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailPostBinding.inflate(layoutInflater)
@@ -22,23 +24,30 @@ class DetailPostActivity : AppCompatActivity() {
         window.statusBarColor = getColor(R.color.main_color)
 
 
-
-
         val postId = intent.getStringExtra("postId")
         val userId = intent.getStringExtra("userId")
         val username = intent.getStringExtra("username")
         val title = intent.getStringExtra("title")
         val body = intent.getStringExtra("body")
 
-        val listComment = ArrayList<CommentData>()
+
+        getPostData(listComment,postId!!)
 
         binding.apply {
             tvUserNameDetailPost.text = username
             tvTitleDetailPost.text = title
             tvBodyDetailPost.text = body
+
+
+            tvUserNameDetailPost.setOnClickListener {
+                Intent(this@DetailPostActivity,UserDetailActivity::class.java).also {
+                    it.putExtra("userId",userId)
+                    startActivity(it)
+                }
+            }
         }
 
-        getPostData(listComment,postId!!)
+
 
     }
 
@@ -77,5 +86,11 @@ class DetailPostActivity : AppCompatActivity() {
         queue.add(stringRequest)
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.rvCommentDetailPost.adapter = AdapterViewCommentPost(listComment)
+        binding.rvCommentDetailPost.layoutManager = LinearLayoutManager(this)
+        binding.rvCommentDetailPost.setHasFixedSize(true)
+    }
 
 }
