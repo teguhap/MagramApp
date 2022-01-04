@@ -16,6 +16,9 @@
         android:theme="@style/Theme.MagramApp"
         tools:targetApi="n">
         <activity
+            android:name=".PhotoDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserDetailActivity"
             android:exported="false" />
 

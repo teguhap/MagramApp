@@ -16,6 +16,8 @@ import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding : ActivityMainBinding
+    val listUser = ArrayList<UserData>()
+    val listPostAdapter = ArrayList<ListPostAdapter>()
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,8 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         window.statusBarColor = getColor(R.color.main_color)
 
-        val listUser = ArrayList<UserData>()
-        val listPostAdapter = ArrayList<ListPostAdapter>()
+
 
         getPostData(listPostAdapter,listUser)
 
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
                 when(it.itemId){
                     R.id.refresh -> {
                         getPostData(listPostAdapter,listUser)
+                        rvPostMain.adapter?.notifyDataSetChanged()
                     }
                 }
                 true
@@ -62,11 +64,13 @@ class MainActivity : AppCompatActivity() {
                 val strResponse = response.toString()
                 val jsonarray = JSONArray(strResponse)
                 for(i in 0 until jsonarray.length()){
-                    val jsonobject = jsonarray.getJSONObject(i)
-                    val id = jsonobject.get("id").toString()
-                    val name = jsonobject.get("name").toString()
-                    val companyName =jsonobject.getJSONObject("company").get("name").toString()
-                    listUser.add(UserData(id,name,companyName))
+                    val jsonObject = jsonarray.getJSONObject(i)
+                    val id = jsonObject.get("id").toString()
+                    val name = jsonObject.get("name").toString()
+                    val email = jsonObject.get("email").toString()
+                    val companyName =jsonObject.getJSONObject("company").get("name").toString()
+                    val address = jsonObject.getJSONObject("address").toString()
+                    listUser.add(UserData(id,name,email,companyName,address))
                 }
             }, {})
 
@@ -110,6 +114,12 @@ class MainActivity : AppCompatActivity() {
         queue.add(stringRequestUser)
         queue.add(stringRequest)
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.rvPostMain.adapter = AdapterViewPostMain(listPostAdapter)
+        binding.rvPostMain.layoutManager = LinearLayoutManager(this@MainActivity)
     }
 
 
