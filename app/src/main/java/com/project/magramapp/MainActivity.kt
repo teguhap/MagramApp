@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.project.magramapp.adapter.AdapterViewPostMain
 import com.project.magramapp.databinding.ActivityMainBinding
+import com.project.magramapp.dataclass.ListPostAdapter
+import com.project.magramapp.dataclass.UserData
 import org.json.JSONArray
 import java.util.ArrayList
 
@@ -27,10 +30,8 @@ class MainActivity : AppCompatActivity() {
 
         getPostData(listPostAdapter,listUser)
 
-
         binding.apply {
             //Toolbar
-            toolbarMain.setTitleTextAppearance(this@MainActivity,R.style.MonsTextAppearance)
             toolbarMain.setOnMenuItemClickListener {
                 when(it.itemId){
                     R.id.refresh -> {

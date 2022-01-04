@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">MagramApp</string>
     <string name="refresh">Refresh</string>
+    <string name="addres">Address</string>
+    <string name="kumparan">Kumparan</string>
+    <string name="company">Company</string>
+    <string name="email">Email</string>
+    <string name="teguh_ananda_permana">Teguh Ananda Permana</string>
+    <string name="name">Name</string>
 </resources>

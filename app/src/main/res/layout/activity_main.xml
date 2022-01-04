@@ -15,6 +15,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/ToolbarTheme"
         app:title="MAGRAM"
         app:menu="@menu/main_menu_bar"
         app:titleTextColor="@color/white" />

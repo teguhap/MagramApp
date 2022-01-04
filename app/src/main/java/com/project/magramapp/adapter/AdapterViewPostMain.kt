@@ -1,4 +1,4 @@
-package com.project.magramapp
+package com.project.magramapp.adapter
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,9 @@ import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-
+import com.project.magramapp.DetailPostActivity
+import com.project.magramapp.dataclass.ListPostAdapter
+import com.project.magramapp.R
 
 
 class AdapterViewPostMain(val listPostAdapter : List<ListPostAdapter>) : RecyclerView.Adapter<AdapterViewPostMain.ViewHolderView>() {
@@ -40,7 +42,7 @@ class AdapterViewPostMain(val listPostAdapter : List<ListPostAdapter>) : Recycle
 
             cvPost.setOnClickListener {
 
-                Intent(context,DetailPostActivity :: class.java).also {
+                Intent(context, DetailPostActivity :: class.java).also {
                     it.putExtra("postId",currentItem.idPost)
                     it.putExtra("userId",currentItem.userId)
                     it.putExtra("title",tvTitle.text.toString())
