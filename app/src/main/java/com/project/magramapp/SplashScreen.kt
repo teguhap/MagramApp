@@ -11,7 +11,7 @@ class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
-
+        window.statusBarColor = getColor(R.color.black)
         //Handler SplashScreen
         Handler().postDelayed({ Intent(this,MainActivity :: class.java).also {
             startActivity(it)
