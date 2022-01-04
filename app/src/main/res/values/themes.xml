@@ -13,4 +13,9 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+
+    <style name="MonsTextAppearance">
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+    </style>
 </resources>
