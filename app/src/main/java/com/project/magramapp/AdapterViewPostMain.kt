@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 
-class AdapterViewPostMain(val listPost : List<ListPost>) : RecyclerView.Adapter<AdapterViewPostMain.ViewHolderView>() {
+class AdapterViewPostMain(val listPostAdapter : List<ListPostAdapter>) : RecyclerView.Adapter<AdapterViewPostMain.ViewHolderView>() {
 
     inner class ViewHolderView(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -31,7 +31,7 @@ class AdapterViewPostMain(val listPost : List<ListPost>) : RecyclerView.Adapter<
             val tvBody = findViewById<TextView>(R.id.tvBodyPost)
             val tvUsername = findViewById<TextView>(R.id.tvUserNamePost)
             val tvCompany = findViewById<TextView>(R.id.tvUserCompanyPost)
-            val currentItem = listPost[position]
+            val currentItem = listPostAdapter[position]
 
             tvTitle.text = currentItem.title
             tvBody.text = currentItem.body
@@ -56,6 +56,6 @@ class AdapterViewPostMain(val listPost : List<ListPost>) : RecyclerView.Adapter<
 
     override fun getItemCount(): Int {
 
-        return listPost.size
+        return listPostAdapter.size
     }
 }
